@@ -14,10 +14,10 @@ const octokit = new Octokit({
       workflow_id: 'pull-request-create.yml',
       ref: 'master',
       inputs: {
-        // apg_branch: process.env.APG_BRANCH,
+        apg_branch: process.env.APG_BRANCH,
         // apg_sha: process.env.APG_SHA,
 
-        apg_branch: process.env.GITHUB_REF,
+        // apg_branch: process.env.GITHUB_REF,
         apg_sha: process.env.GITHUB_SHA,
       },
     });
