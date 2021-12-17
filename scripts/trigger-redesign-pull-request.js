@@ -7,7 +7,6 @@ const octokit = new Octokit({
 
 (async () => {
   try {
-    console.log(process.env.GITHUB_REF, process.env.GITHUB_SHA);
     await octokit.rest.actions.createWorkflowDispatch({
       owner: 'howard-e',
       repo: 'wai-aria-practices',
@@ -15,10 +14,7 @@ const octokit = new Octokit({
       ref: 'master',
       inputs: {
         apg_branch: process.env.APG_BRANCH,
-        // apg_sha: process.env.APG_SHA,
-
-        // apg_branch: process.env.GITHUB_REF,
-        apg_sha: process.env.GITHUB_SHA,
+        apg_sha: process.env.APG_SHA,
       },
     });
     console.info('workflow.dispatch.success');

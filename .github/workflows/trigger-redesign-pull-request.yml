@@ -32,4 +32,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           APG_BRANCH: ${{ github.head_ref }}
-#          APG_SHA: ${{ github.sha }}
+          APG_SHA: ${{ github.sha }}
