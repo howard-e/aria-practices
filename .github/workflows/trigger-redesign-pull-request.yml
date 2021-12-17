@@ -31,5 +31,5 @@ jobs:
           node scripts/trigger-redesign-pull-request.js
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          APG_BRANCH: ${{ github.ref_name }}
+          APG_BRANCH: ${{ github.ref }}
           APG_SHA: ${{ github.sha }}
