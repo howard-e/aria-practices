@@ -1,7 +1,7 @@
 name: Trigger pull request creation for wai repository
 
 on:
-  pull_request:
+  pull_request_target:
     paths:
       - ".github/workflows/wai-trigger-pr.yml"
       - "scripts/wai-trigger-pr.js"
@@ -26,12 +26,25 @@ jobs:
         with:
           cache: npm
 
-      - name: Install @octokit/rest
-        run: npm install @octokit/rest
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run wai-trigger-pr script
-        run: |
-          node scripts/wai-trigger-pr.js
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: 'wai-aria-practices',
+              workflow_id: 'pr-create.yml',
+              ref: 'master',
+              inputs: {
+                apg_branch: 'apg/' + ${{ github.head_ref }},
+                apg_sha: ${{ github.event.pull_request.head.sha }},
+                apg_pr_number: ${{ github.event.pull_request.number }}
+              }
+            })
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           APG_BRANCH: ${{ github.head_ref }}
