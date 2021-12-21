@@ -1,7 +1,7 @@
 name: Trigger pull request creation for wai repository
 
 on:
-  pull_request_target:
+  pull_request:
     paths:
       - ".github/workflows/wai-trigger-pr.yml"
       - "scripts/wai-trigger-pr.js"
