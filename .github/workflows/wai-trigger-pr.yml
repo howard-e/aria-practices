@@ -26,25 +26,12 @@ jobs:
         with:
           cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install @octokit/rest
+        run: npm install @octokit/rest
 
       - name: Run wai-trigger-pr script
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: 'wai-aria-practices',
-              workflow_id: 'pr-create.yml',
-              ref: 'master',
-              inputs: {
-                apg_branch: 'apg/' + ${{ github.head_ref }},
-                apg_sha: ${{ github.event.pull_request.head.sha }},
-                apg_pr_number: ${{ github.event.pull_request.number }}
-              }
-            })
+        run: |
+          node scripts/wai-trigger-pr.js
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           APG_BRANCH: ${{ github.head_ref }}
