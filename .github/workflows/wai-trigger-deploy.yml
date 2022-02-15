@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/deploy.yml
-      - .github/workflows/wai-trigger-deploy.yml
-      - scripts/wai-trigger-deploy.js
-      - common/**
-      - examples/**
-      - img/**
-      - aria-practices.html
-      - README.md
+      - ".github/workflows/deploy.yml"
+      - ".github/workflows/wai-trigger-deploy.yml"
+      - "scripts/wai-trigger-deploy.js"
+      - "common/**"
+      - "examples/**"
+      - "img/**"
+      - "aria-practices.html"
+      - "README.md"
 
 jobs:
   deploy-wai:
