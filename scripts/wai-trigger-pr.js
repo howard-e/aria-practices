@@ -11,7 +11,7 @@ const octokit = new Octokit({
       owner: 'howard-e',
       repo: 'wai-aria-practices',
       workflow_id: 'pr-create.yml',
-      ref: 'master',
+      ref: 'main',
       inputs: {
         apg_branch: process.env.APG_BRANCH,
         apg_sha: process.env.APG_SHA,

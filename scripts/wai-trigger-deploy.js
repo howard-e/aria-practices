@@ -11,7 +11,7 @@ const octokit = new Octokit({
       owner: 'howard-e',
       repo: 'wai-aria-practices',
       workflow_id: 'deploy.yml',
-      ref: 'master',
+      ref: 'main',
     });
     console.info('deploy.workflow.dispatch.success');
   } catch (e) {
