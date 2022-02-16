@@ -13,7 +13,7 @@ const octokit = new Octokit({
       workflow_id: 'pr-create.yml',
       ref: 'master',
       inputs: {
-        apg_branch: 'apg/' + process.env.APG_BRANCH,
+        apg_branch: process.env.APG_BRANCH,
         apg_sha: process.env.APG_SHA,
         apg_pr_number: process.env.APG_PR_NUMBER,
       },
