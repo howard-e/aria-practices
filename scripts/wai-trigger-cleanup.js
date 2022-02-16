@@ -11,7 +11,7 @@ const octokit = new Octokit({
       owner: 'howard-e',
       repo: 'wai-aria-practices',
       workflow_id: 'remove-branch.yml',
-      ref: 'master',
+      ref: 'main',
       inputs: {
         apg_branch: process.env.APG_BRANCH,
       },
