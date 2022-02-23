@@ -7,6 +7,18 @@ const octokit = new Octokit({
 
 (async () => {
   try {
+    // check if wai generated branch exists with branch name
+    await octokit.rest.repos.getBranch({
+      owner: 'howard-e',
+      repo: 'wai-aria-practices',
+      branch: 'apg/' + process.env.APG_BRANCH,
+    });
+  } catch (e) {
+    console.info(`'apg/${process.env.APG_BRANCH}' not found`);
+    process.exit();
+  }
+
+  try {
     await octokit.rest.actions.createWorkflowDispatch({
       owner: 'howard-e',
       repo: 'wai-aria-practices',
