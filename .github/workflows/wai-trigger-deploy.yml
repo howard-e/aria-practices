@@ -35,19 +35,12 @@ jobs:
           script: |
             try {
               await github.rest.actions.createWorkflowDispatch({
-                owner: 'howard-e',
+                owner: context.repo.owner,
                 repo: 'wai-aria-practices',
                 workflow_id: 'deploy.yml',
                 ref: 'main',
               });
-              console.info('deploy.workflow.dispatch.success');
             } catch (e) {
               console.error('workflow.dispatch.fail', e);
               process.exit(1);
             }
-
-#      - name: Run wai-trigger-deploy script
-#        run: |
-#          node scripts/wai-trigger-deploy.js
-#        env:
-#          GH_TOKEN: ${{ secrets.GH_TOKEN }}
