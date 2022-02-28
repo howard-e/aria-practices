@@ -28,14 +28,29 @@ jobs:
         with:
           cache: npm
 
-      - name: Install @octokit/rest
-        run: npm install @octokit/rest
-
       - name: Run wai-trigger-pr script
-        run: |
-          node scripts/wai-trigger-pr.js
+        uses: actions/github-script@v6
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           APG_BRANCH: ${{ github.head_ref }}
           APG_SHA: ${{ github.event.pull_request.head.sha }}
           APG_PR_NUMBER: ${{ github.event.pull_request.number }}
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            try {
+              await octokit.rest.actions.createWorkflowDispatch({
+                owner: context.repo.owner,
+                repo: 'wai-aria-practices',
+                workflow_id: 'pr-create.yml',
+                ref: 'main',
+                inputs: {
+                  apg_branch: process.env.APG_BRANCH,
+                  apg_sha: process.env.APG_SHA,
+                  apg_pr_number: process.env.APG_PR_NUMBER,
+                }
+              });
+              console.info('pr-create.workflow.dispatch.success');
+            } catch (e) {
+              console.error('workflow.dispatch.fail', e);
+              process.exit(1);
+            }
