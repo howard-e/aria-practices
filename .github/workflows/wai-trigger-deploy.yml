@@ -31,7 +31,7 @@ jobs:
       - name: Run wai-trigger-deploy script
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
           script: |
             try {
               await github.rest.actions.createWorkflowDispatch({
