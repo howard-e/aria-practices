@@ -35,7 +35,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: 'wai-aria-practices',
                 workflow_id: 'deploy.yml',
-                ref: 'main',
+                ref: 'main'
               });
               console.info('deploy.workflow.dispatch.success');
             } catch (e) {
