@@ -25,9 +25,6 @@ jobs:
         with:
           cache: npm
 
-      - name: Install @octokit/rest
-        run: npm install @octokit/rest
-
       - name: Run wai-trigger-deploy script
         uses: actions/github-script@v6
         with:
@@ -40,6 +37,7 @@ jobs:
                 workflow_id: 'deploy.yml',
                 ref: 'main',
               });
+              console.info('deploy.workflow.dispatch.success');
             } catch (e) {
               console.error('workflow.dispatch.fail', e);
               process.exit(1);
