@@ -38,7 +38,7 @@ jobs:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
             try {
-              await octokit.rest.actions.createWorkflowDispatch({
+              await github.rest.actions.createWorkflowDispatch({
                 owner: context.repo.owner,
                 repo: 'wai-aria-practices',
                 workflow_id: 'pr-create.yml',
