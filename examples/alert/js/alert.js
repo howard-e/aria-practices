@@ -7,7 +7,7 @@
 'use strict';
 
 window.addEventListener('load', function () {
-  var button = document.getElementById('alert-trigger');
+  var button = document.getElementById('alert-trigger1');
 
   button.addEventListener('click', addAlert);
 });
