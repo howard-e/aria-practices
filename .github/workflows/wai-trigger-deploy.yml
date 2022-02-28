@@ -5,9 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/workflows/deploy.yml"
       - ".github/workflows/wai-trigger-deploy.yml"
-      - "scripts/wai-trigger-deploy.js"
       - "common/**"
       - "examples/**"
       - "img/**"
@@ -30,15 +28,9 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            try {
-              await github.rest.actions.createWorkflowDispatch({
-                owner: context.repo.owner,
-                repo: 'wai-aria-practices',
-                workflow_id: 'deploy.yml',
-                ref: 'main'
-              });
-              console.info('deploy.workflow.dispatch.success');
-            } catch (e) {
-              console.error('workflow.dispatch.fail', e);
-              process.exit(1);
-            }
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: 'wai-aria-practices',
+              workflow_id: 'deploy.yml',
+              ref: 'main'
+            });
