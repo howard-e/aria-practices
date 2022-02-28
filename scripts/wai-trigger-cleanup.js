@@ -9,7 +9,7 @@ const octokit = new Octokit({
   try {
     // check if wai generated branch exists with branch name
     await octokit.rest.repos.getBranch({
-      owner: 'howard-e',
+      owner: process.env.OWNER,
       repo: 'wai-aria-practices',
       branch: 'apg/' + process.env.APG_BRANCH,
     });
@@ -20,7 +20,7 @@ const octokit = new Octokit({
 
   try {
     await octokit.rest.actions.createWorkflowDispatch({
-      owner: 'howard-e',
+      owner: process.env.OWNER,
       repo: 'wai-aria-practices',
       workflow_id: 'remove-branch.yml',
       ref: 'main',
