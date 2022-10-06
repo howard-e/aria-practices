@@ -27,16 +27,19 @@ jobs:
         with:
           ref: refs/pull/${{ github.event.pull_request.number }}/head
 
-      - name: Trigger wai-aria-practices PR update
-        uses: actions/github-script@v5
-        env:
-          APG_BRANCH: ${{ github.head_ref }}
-          APG_SHA: ${{ github.event.pull_request.head.sha }}
-          APG_PR_NUMBER: ${{ github.event.pull_request.number }}
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          script: |
-            printenv
+      - name: Testing
+        run: |
+          printenv
+
+#      - name: Trigger wai-aria-practices PR update
+#        uses: actions/github-script@v5
+#        env:
+#          APG_BRANCH: ${{ github.head_ref }}
+#          APG_SHA: ${{ github.event.pull_request.head.sha }}
+#          APG_PR_NUMBER: ${{ github.event.pull_request.number }}
+#        with:
+#          github-token: ${{ secrets.GH_TOKEN }}
+#          script: |
 #            await github.rest.actions.createWorkflowDispatch({
 #              owner: context.repo.owner,
 #              repo: 'wai-aria-practices',
