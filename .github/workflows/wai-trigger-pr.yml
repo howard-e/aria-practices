@@ -38,7 +38,7 @@ jobs:
           echo ${{ github.event.pull_request.number }}
           echo ${{ github.event.pull_request.head.repo.full_name }}
           echo ${{ github.event.pull_request.head.repo.fork }}
-          ${{ github.event.pull_request.head.repo.fork && github.event.pull_request.head.repo.full_name }}
+          echo ${{ github.event.pull_request.head.repo.fork && github.event.pull_request.head.repo.full_name }}
 
       - name: Trigger wai-aria-practices PR update
         uses: actions/github-script@v5
