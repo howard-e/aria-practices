@@ -30,6 +30,10 @@ jobs:
       - name: Testing
         run: |
           printenv
+          echo ${{ github.head_ref }}
+          echo ${{ github.event.pull_request.head.sha }}
+          echo ${{ github.event.pull_request.number }}
+          echo ${{ github.event.pull_request }}
 
 #      - name: Trigger wai-aria-practices PR update
 #        uses: actions/github-script@v5
