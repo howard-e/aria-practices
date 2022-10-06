@@ -30,6 +30,7 @@ jobs:
       - name: Testing
         run: |
           printenv
+          echo ${{ github }}
           echo ${{ github.head_ref }}
           echo ${{ github.event.pull_request.head.sha }}
           echo ${{ github.event.pull_request.number }}
