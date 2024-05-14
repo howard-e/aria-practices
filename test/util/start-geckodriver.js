@@ -1,7 +1,7 @@
 const assert = require('assert');
 const { start: startGeckoDriver } = require('geckodriver');
 // const { spawn } = require('child_process');
-const waitPort = require('wait-port');
+// const waitPort = require('wait-port');
 
 const getJSON = require('./get-json');
 const forceSerial = require('./force-serial');
@@ -18,7 +18,7 @@ const startOnPort = async (port, timeout) => {
   // const child = spawn(binaryPath, ['--port', port]);
   const child = await startGeckoDriver({ port });
 
-  await waitPort({ port });
+  // await waitPort({ port });
 
   return new Promise((resolve, reject) => {
     let stopPolling = false;
