@@ -21,10 +21,11 @@ on:
 
 jobs:
   regression:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
         CI_NODE_INDEX: [0, 1, 2, 3, 4]
 
     steps:
