@@ -23,14 +23,25 @@ jobs:
       - name: Install @octokit/rest
         run: npm install @octokit/rest
 
+      - name: Check if branch is from a fork
+        id: check_fork
+        run: |
+          if [ "${{ github.event.pull_request.head.repo.fork }}" == "true" ]; then
+            echo "Branch is from a fork."
+            echo "FORK_OWNER=${{ github.event.pull_request.head.repo.owner.login }}" >> $GITHUB_ENV
+          else
+            echo "Branch is not from a fork."
+            echo "FORK_OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
+          fi
+
       - name: Run wai-trigger-cleanup script
         run: |
           node scripts/wai-trigger-cleanup.js
         env:
           GH_TOKEN: ${{ secrets.W3CGRUNTBOT_TOKEN }}
           OWNER: ${{ github.repository_owner }}
-          # reference github.event.ref for branch deletion
           APG_BRANCH: ${{ github.event.ref }}
+          FORK_OWNER: ${{ env.FORK_OWNER }}
 
   cleanup-pr-wai:
     if: ${{ github.event_name == 'pull_request' || github.event_name == 'pull_request_target' }}
@@ -46,11 +57,19 @@ jobs:
       - name: Install @octokit/rest
         run: npm install @octokit/rest
 
+      - name: Check if branch is from a fork
+        id: check_fork
+        run: |
+          if [ "${{ github.event.pull_request.head.repo.fork }}" == "true" ]; then
+            echo "Branch is from a fork."
+            echo "FORK_OWNER=$FORK_OWNER" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run wai-trigger-cleanup script
         run: |
           node scripts/wai-trigger-cleanup.js
         env:
           GH_TOKEN: ${{ secrets.W3CGRUNTBOT_TOKEN }}
           OWNER: ${{ github.repository_owner }}
-          # reference github.head_ref for pull request
           APG_BRANCH: ${{ github.head_ref }}
+          FORK_OWNER: ${{ env.FORK_OWNER }}

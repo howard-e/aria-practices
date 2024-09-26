@@ -5,17 +5,33 @@ const octokit = new Octokit({
   auth: process.env.GH_TOKEN,
 });
 
+async function getBranch(branchName) {
+  return octokit.rest.repos.getBranch({
+    owner: process.env.OWNER,
+    repo: 'wai-aria-practices',
+    branch: branchName,
+  });
+}
+
 (async () => {
+  let branchName = 'apg/' + process.env.APG_BRANCH;
+
   try {
     // check if wai generated branch exists with branch name
-    await octokit.rest.repos.getBranch({
-      owner: process.env.OWNER,
-      repo: 'wai-aria-practices',
-      branch: 'apg/' + process.env.APG_BRANCH,
-    });
+    await getBranch(branchName);
   } catch (e) {
-    console.info(`'apg/${process.env.APG_BRANCH}' not found`);
-    process.exit();
+    console.info(`'${branchName}' branch not found`);
+
+    branchName = 'apg/' + process.env.FORK_OWNER + '-' + process.env.APG_BRANCH;
+    try {
+      // check again if WAI generated branch exists with specially formatted
+      // branch name exists (in the instance where the branch name exists
+      // with the pre-pended fork owner's name)
+      await getBranch(branchName);
+    } catch (e) {
+      console.info(`'${branchName}' branch not found`);
+      process.exit();
+    }
   }
 
   try {
