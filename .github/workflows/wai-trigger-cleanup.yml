@@ -72,4 +72,4 @@ jobs:
           GH_TOKEN: ${{ secrets.W3CGRUNTBOT_TOKEN }}
           OWNER: ${{ github.repository_owner }}
           APG_BRANCH: ${{ github.head_ref }}
-          FORK_OWNER: ${{ env.FORK_OWNER }}
+          FORK_OWNER: ${{ steps.check_fork.outputs.FORK_OWNER }}
