@@ -41,10 +41,10 @@ async function getBranch(branchName) {
       workflow_id: 'remove-branch.yml',
       ref: 'main',
       inputs: {
-        apg_branch: process.env.APG_BRANCH,
+        apg_branch: branchName,
       },
     });
-    console.info('remove-branch.workflow.dispatch.success');
+    console.info('remove-branch.workflow.dispatch.success', branchName);
   } catch (e) {
     console.error('workflow.dispatch.fail', e);
     process.exit(1);

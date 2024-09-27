@@ -26,8 +26,8 @@ jobs:
       - name: Check if branch is from a fork
         id: check_fork
         run: |
-          if [ "${{ github.event.pull_request.head.repo.fork }}" == "true" ]; then
-            FORK_OWNER=${{ github.event.pull_request.head.repo.owner.login }}
+          if [ "${{ github.repository.fork }}" == "true" ]; then
+            FORK_OWNER=${{ github.repository.owner.login }}
             echo "Branch is from a fork, owner: $FORK_OWNER"
             echo "FORK_OWNER=$FORK_OWNER" >> "$GITHUB_OUTPUT"
           fi
