@@ -14,7 +14,7 @@ async function getBranch(branchName) {
 }
 
 (async () => {
-  let branchName = 'apg/' + process.env.APG_BRANCH;
+  let branchName = process.env.APG_BRANCH;
 
   try {
     // check if wai generated branch exists with branch name
@@ -22,7 +22,7 @@ async function getBranch(branchName) {
   } catch (e) {
     console.info(`'${branchName}' branch not found`);
 
-    branchName = 'apg/' + process.env.FORK_OWNER + '-' + process.env.APG_BRANCH;
+    branchName = process.env.FORK_OWNER + '-' + process.env.APG_BRANCH;
     try {
       // check again if WAI generated branch exists with specially formatted
       // branch name exists (in the instance where the branch name exists
@@ -41,10 +41,13 @@ async function getBranch(branchName) {
       workflow_id: 'remove-branch.yml',
       ref: 'main',
       inputs: {
-        apg_branch: branchName,
+        apg_branch: 'apg/' + branchName,
       },
     });
-    console.info('remove-branch.workflow.dispatch.success', branchName);
+    console.info(
+      'remove-branch.workflow.dispatch.success',
+      'apg/' + branchName
+    );
   } catch (e) {
     console.error('workflow.dispatch.fail', e);
     process.exit(1);
