@@ -38,6 +38,7 @@ jobs:
         run: |
           brew install firefox
           brew install grep
+          export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
