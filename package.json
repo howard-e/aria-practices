@@ -1,6 +1,6 @@
 {
   "name": "aria-practices",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "This repository maintains the WAI-ARIA Authoring Practices Guide. This is developed by the [ARIA Working Group](http://www.w3.org/WAI/ARIA/). The staff contact is [Michael Cooper](http://www.w3.org/People/cooper/). Please do not provide commit access to this repository without coordination.",
   "main": "index.js",
   "private": true,
